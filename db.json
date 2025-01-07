@@ -1,9 +1,9 @@
 {
-  "data": [
+  "projects": [
     {
-      "key": "1",
+      "id": "1",
       "project_id": "P001",
-      "project_name": "Project Alpha",
+      "project_name": "Project Alpha Updated to new One",
       "start_date": "2023-01-01",
       "end_date": "2023-06-30",
       "project_manager": "Alice Johnson",
@@ -11,7 +11,7 @@
       "project_description": "This is the description for Project Alpha."
     },
     {
-      "key": "2",
+      "id": "2",
       "project_id": "P002",
       "project_name": "Project Beta",
       "start_date": "2023-02-15",
@@ -21,7 +21,7 @@
       "project_description": "This is the description for Project Beta."
     },
     {
-      "key": "3",
+      "id": "3",
       "project_id": "P003",
       "project_name": "Project Gamma",
       "start_date": "2023-03-01",
@@ -31,7 +31,7 @@
       "project_description": "This is the description for Project Gamma."
     },
     {
-      "key": "4",
+      "id": "4",
       "project_id": "P004",
       "project_name": "Project Delta",
       "start_date": "2023-04-10",
@@ -41,7 +41,7 @@
       "project_description": "This is the description for Project Delta."
     },
     {
-      "key": "5",
+      "id": "5",
       "project_id": "P005",
       "project_name": "Project Epsilon",
       "start_date": "2023-05-05",
@@ -51,7 +51,7 @@
       "project_description": "This is the description for Project Epsilon."
     },
     {
-      "key": "6",
+      "id": "6",
       "project_id": "P006",
       "project_name": "Project Zeta",
       "start_date": "2023-06-15",

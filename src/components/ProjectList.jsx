@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 
-const ProjectList = ({data}) => {
+const ProjectList = ({projects}) => {
   const navigate = useNavigate();
 
   const columns = [
@@ -38,7 +38,7 @@ const ProjectList = ({data}) => {
         <Space size="middle">
           <Button
             type="primary"
-            onClick={() => navigate(`/edit/${record.key}`)}
+            onClick={() => navigate(`/edit/${record.id}`)}
           >
             Edit
           </Button>
@@ -47,7 +47,7 @@ const ProjectList = ({data}) => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  return <Table columns={columns} dataSource={projects} />;
 };
 
 export default ProjectList;
