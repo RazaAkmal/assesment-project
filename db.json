@@ -3,12 +3,12 @@
     {
       "id": "1",
       "project_id": "P001",
-      "project_name": "Project Alpha Updated to new One",
+      "project_name": "Project Alph",
       "start_date": "2023-01-01",
       "end_date": "2023-06-30",
       "project_manager": "Alice Johnson",
       "favourite": true,
-      "project_description": "This is the description for Project Alpha."
+      "project_description": "This is the description for Project Alpha.\nThis is the description for Project Alpha."
     },
     {
       "id": "2",
@@ -17,48 +17,18 @@
       "start_date": "2023-02-15",
       "end_date": "2023-08-31",
       "project_manager": "Bob Smith",
-      "favourite": false,
+      "favourite": true,
       "project_description": "This is the description for Project Beta."
     },
     {
       "id": "3",
       "project_id": "P003",
-      "project_name": "Project Gamma",
+      "project_name": "Project Game",
       "start_date": "2023-03-01",
       "end_date": "2023-09-15",
       "project_manager": "Charlie Brown",
-      "favourite": true,
+      "favourite": false,
       "project_description": "This is the description for Project Gamma."
-    },
-    {
-      "id": "4",
-      "project_id": "P004",
-      "project_name": "Project Delta",
-      "start_date": "2023-04-10",
-      "end_date": "2023-10-20",
-      "project_manager": "Diana Ross",
-      "favourite": false,
-      "project_description": "This is the description for Project Delta."
-    },
-    {
-      "id": "5",
-      "project_id": "P005",
-      "project_name": "Project Epsilon",
-      "start_date": "2023-05-05",
-      "end_date": "2023-11-25",
-      "project_manager": "Ethan Hunt",
-      "favourite": true,
-      "project_description": "This is the description for Project Epsilon."
-    },
-    {
-      "id": "6",
-      "project_id": "P006",
-      "project_name": "Project Zeta",
-      "start_date": "2023-06-15",
-      "end_date": "2023-12-30",
-      "project_manager": "Fiona Harper",
-      "favourite": false,
-      "project_description": "This is the description for Project Zeta."
     }
   ]
 }

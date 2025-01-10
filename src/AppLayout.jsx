@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Layout, Spin } from "antd";
 import styled from "styled-components";
-import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import "react-toastify/dist/ReactToastify.css";
+
+import { useProjects } from "./hooks/useProjects";
+
 import ProjectList from "./components/ProjectList";
 import EditProject from "./components/EditProject";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { ToastContainer } from "react-toastify";
-import { useProjects } from "./hooks/useProjects";
-import "react-toastify/dist/ReactToastify.css";
+import ViewProject from "./components/ViewProject";
+import CreateProject from "./components/CreateProject";
 
 const { Content, Sider } = Layout;
 const TableContainer = styled.div`
@@ -21,6 +25,7 @@ const StyledList = styled.ul`
 
 const ListItem = styled.li`
   padding: 5px;
+  cursor: pointer;
 `;
 
 const StyledSider = styled(Sider)`
@@ -84,24 +89,41 @@ const StyledBtn = styled.div`
   }
 `;
 
+const SyledLayout = styled(Layout)`
+  height: 100%;
+`;
+
 const AppLayout = () => {
-  const { projects, loading, updateProjectData } = useProjects();
+  const navigate = useNavigate();
+  const { projects, loading, updateProjectData, createProject } = useProjects();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const favouriteProjects = projects.filter((project) => project.favourite);
-  console.log(favouriteProjects, 'pro')
+
+  const handleViewProject = (id) => {
+    navigate(`/projects/${id}`);
+  };
+
+  const handleCreateProject = () => {
+    navigate("/create");
+  };
 
   return (
     <Container>
       <ToastContainer />
       {loading && <Spin tip="Loading..." size="large" />}
       {!loading && (
-        <Layout>
+        <SyledLayout>
           <StyledSider width={200}>
             <TableContainer>
               <h4>Favourite Projects</h4>
               <StyledList>
                 {favouriteProjects.map((project) => (
-                  <ListItem key={project.id}>{project.project_name}</ListItem>
+                  <ListItem
+                    key={project.id}
+                    onClick={() => handleViewProject(project.id)}
+                  >
+                    {project.project_name}
+                  </ListItem>
                 ))}
               </StyledList>
             </TableContainer>
@@ -110,23 +132,38 @@ const AppLayout = () => {
             <Routes>
               <Route
                 path="/"
-                element={<ProjectList projects={projects} />}
+                element={
+                  <ProjectList
+                    projects={projects}
+                    handleCreateProject={handleCreateProject}
+                    updateProjectData={(updatedData, isFav) =>
+                      updateProjectData(updatedData, isFav)
+                    }
+                  />
+                }
               />
               <Route
                 path="/edit/:id"
                 element={
                   <EditProject
                     projects={projects}
-                    updateProjectData={(updatedData) => updateProjectData(updatedData)}
+                    updateProjectData={(updatedData) =>
+                      updateProjectData(updatedData)
+                    }
                   />
                 }
               />
+              <Route
+                path="/projects/:id"
+                element={<ViewProject projects={projects} />}
+              />
+              <Route
+                path="/create"
+                element={<CreateProject createProject={createProject} />}
+              />
             </Routes>
           </StyledContent>
-          <MobileSider
-            className={mobileSidebarOpen ? "open" : ""}
-            width={200}
-          >
+          <MobileSider className={mobileSidebarOpen ? "open" : ""} width={200}>
             <TableContainer>
               <h4>Favourite Projects</h4>
               <StyledList>
@@ -139,7 +176,7 @@ const AppLayout = () => {
           <StyledBtn onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}>
             {mobileSidebarOpen ? <LeftOutlined /> : <RightOutlined />}
           </StyledBtn>
-        </Layout>
+        </SyledLayout>
       )}
     </Container>
   );
