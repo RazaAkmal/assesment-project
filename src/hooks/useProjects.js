@@ -1,6 +1,5 @@
-// hooks/useProjects.js
 import { useState, useEffect } from "react";
-import { fetchProjects, updateProject } from "../services/api";
+import { fetchProjects, updateProject, createProject as apiCreateProject } from "../services/api";
 import { toast } from "react-toastify";
 
 export const useProjects = () => {
@@ -25,7 +24,7 @@ export const useProjects = () => {
   }, []);
 
   // Update a specific project
-  const updateProjectData = async (updatedProject) => {
+  const updateProjectData = async (updatedProject, isFav = null) => {
     try {
       const updated = await updateProject(updatedProject.id, updatedProject);
       setProjects((prevProjects) =>
@@ -33,9 +32,27 @@ export const useProjects = () => {
           project.id === updated.id ? updated : project
         )
       );
-      toast.success("Project updated successfully!");
+      if (isFav !== null) {
+        if (isFav) {
+          toast.success("Project added to favourites!");
+        } else {
+          toast.info("Project removed from favourites.");
+        }
+      } else {
+        toast.success("Project updated successfully!");
+      }
     } catch (error) {
       toast.error(`Failed to update project: ${error.message}`);
+    }
+  };
+
+  const createProject = async (newProject) => {
+    try {
+      const createdProject = await apiCreateProject(newProject);
+      setProjects((prevProjects) => [...prevProjects, createdProject]);
+      toast.success("Project created successfully!");
+    } catch (error) {
+      toast.error(`Failed to create project: ${error.message}`);
     }
   };
 
@@ -43,5 +60,6 @@ export const useProjects = () => {
     projects,
     loading,
     updateProjectData,
+    createProject
   };
 };
